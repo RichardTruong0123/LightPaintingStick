@@ -91,9 +91,74 @@ Install these libraries from the Arduino Library Manager.
 
 ---
 
-# TFT_eSPI Setup
+# Library Setup
 
-Configure User_Setup.h:
+This project requires custom configuration files for both LVGL and TFT_eSPI.
+
+---
+
+## LVGL Setup
+
+1. Install the LVGL library using the Arduino Library Manager.
+
+2. Locate the LVGL library folder:
+
+### Windows
+
+```text
+Documents\Arduino\libraries\lvgl
+```
+
+3. Copy the provided `lv_conf.h` file into:
+
+```text
+Documents\Arduino\libraries\lvgl\
+```
+
+4. Open:
+
+```text
+lv_conf.h
+```
+
+Verify the following settings:
+
+```cpp
+#define LV_USE_LOG                0
+#define LV_COLOR_DEPTH            16
+#define LV_MEM_SIZE               (64U * 1024U)
+```
+
+For ESP32-S3 with PSRAM you may increase memory:
+
+```cpp
+#define LV_MEM_SIZE               (128U * 1024U)
+```
+
+---
+
+## TFT_eSPI Setup
+
+1. Install the TFT_eSPI library.
+
+2. Locate:
+
+```text
+Documents\Arduino\libraries\TFT_eSPI\
+```
+
+3. Replace the following files with the project versions:
+
+```text
+User_Setup.h
+User_Setup_Select.h
+```
+
+or alternatively create a custom setup file.
+
+---
+
+### TFT_eSPI User_Setup.h
 
 ```cpp
 #define ST7789_DRIVER
@@ -104,10 +169,65 @@ Configure User_Setup.h:
 #define TFT_MISO 40
 #define TFT_MOSI 38
 #define TFT_SCLK 39
+
 #define TFT_CS   45
 #define TFT_DC   42
 #define TFT_RST  -1
+
+#define LOAD_GLCD
+#define LOAD_FONT2
+#define LOAD_FONT4
+#define LOAD_FONT6
+#define LOAD_FONT7
+#define LOAD_FONT8
+
+#define SPI_FREQUENCY       40000000
+#define SPI_READ_FREQUENCY  20000000
 ```
+
+---
+
+## ESP32 Board Settings
+
+Arduino IDE:
+
+| Setting          | Value              |
+| ---------------- | ------------------ |
+| Board            | ESP32S3 Dev Module |
+| USB CDC On Boot  | Enabled            |
+| Flash Size       | 16MB               |
+| PSRAM            | Enabled            |
+| Partition Scheme | Huge APP           |
+| Upload Speed     | 921600             |
+
+---
+
+## Enable PSRAM
+
+The project uses PSRAM for:
+
+* LVGL buffers
+* BMP image loading
+* File browser memory
+* Large image previews
+
+Verify PSRAM is enabled:
+
+```cpp
+Serial.printf(
+    "PSRAM: %d bytes\n",
+    ESP.getPsramSize());
+```
+
+---
+
+## First Build
+
+1. Install all required libraries.
+2. Copy `lv_conf.h`.
+3. Copy `User_Setup.h`.
+4. Enable PSRAM.
+5. Compile and upload.
 
 ---
 
