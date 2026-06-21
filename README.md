@@ -1,4 +1,4 @@
-# ESP32-S3 LED Pattern Controller
+# Light Painting Stick
 
 A touchscreen LED pattern controller for the Waveshare ESP32-S3 display using LVGL, FastLED, SD card pattern files, and CST816D touch input.
 
