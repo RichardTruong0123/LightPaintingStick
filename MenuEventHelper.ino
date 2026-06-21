@@ -58,10 +58,14 @@ void SetColorPalette(const char *paletteName)
    // selectedPalette = String(paletteName);
 
     if (paletteName == "Rainbow") {
-      Pattern.foreground_fp = Rainbow1;
+      currentPalette = RainbowColors_p;
+      currentBlending = NOBLEND;
+      Pattern.foreground_fp = FillLEDsFromPaletteColors;    
     }
     if (paletteName == "Rainbow Stripes") {
-      Pattern.foreground_fp = Rainbow1;
+      currentPalette = RainbowStripeColors_p;
+      currentBlending = NOBLEND;
+      Pattern.foreground_fp = FillLEDsFromPaletteColors;    
     }
 
     if (paletteName == "Rainbow Pride") {
