@@ -6,9 +6,38 @@ struct FileEntry {
   bool isDirectory;
 };
 
-
 static std::vector<FileEntry> entries;
 bool longPressHandled = false;
+
+static lv_style_t file_btn_style;
+
+void init_file_button_style()
+{
+    lv_style_init(&file_btn_style);
+
+    // Off-white background
+    lv_style_set_bg_color(&file_btn_style,
+                          lv_color_hex(0xF4F1EA));   // beige/off-white
+
+    lv_style_set_bg_opa(&file_btn_style,
+                        LV_OPA_COVER);
+
+    // // Dark text
+    // lv_style_set_text_color(&file_btn_style,
+    //                         lv_color_black());
+
+    // // Light gray border
+    // lv_style_set_border_width(&file_btn_style, 1);
+    // lv_style_set_border_color(&file_btn_style,
+    //                           lv_color_hex(0xC0C0C0));
+
+    // // Rounded corners
+    // lv_style_set_radius(&file_btn_style, 6);
+
+    // // Optional padding
+    // lv_style_set_pad_all(&file_btn_style, 8);
+}
+
 int compareFileEntries(const void *a,
                        const void *b) {
 
@@ -188,8 +217,8 @@ void file_item_long_press_event(lv_event_t *e)
     if (!lower.endsWith(".bmp"))
         return;
 
-    show_bmp_preview(fullPath.c_str());
-   // show_image_viewer(fullPath.c_str());
+    //show_bmp_preview(fullPath.c_str());
+    show_image_viewer(fullPath.c_str());
     while (bmpPreviewActive) {
 
           if (readTouch())
@@ -242,6 +271,7 @@ void file_browser_touch_event(lv_event_t *e) {
 
 void create_file_browser() {
 
+init_file_button_style();
   // =====================================
   // OVERLAY
   // =====================================
@@ -350,6 +380,11 @@ void create_file_browser() {
                 LV_SYMBOL_FILE,
                 file.name());
 
+        // Apply the style
+        lv_obj_add_style(btn,
+                          &file_btn_style,
+                          LV_PART_MAIN);
+
         lv_obj_add_event_cb(btn,
                             file_item_event,
                             LV_EVENT_CLICKED,
@@ -398,6 +433,11 @@ void populate_file_list(const char *path) {
                         file_item_event,
                         LV_EVENT_CLICKED,
                         NULL);
+
+    // Apply the style
+    lv_obj_add_style(btn,
+                      &file_btn_style,
+                      LV_PART_MAIN);                        
   }
 
   // =====================================
@@ -461,6 +501,21 @@ void populate_file_list(const char *path) {
           file_list,
           LV_SYMBOL_DIRECTORY,
           entry.name.c_str());
+
+        // Apply the style
+        lv_obj_add_style(btn,
+                          &file_btn_style,
+                          LV_PART_MAIN);
+
+        /* Child 0 = icon label */
+        /* Child 1 = text label */
+        lv_obj_t *icon = lv_obj_get_child(btn, 0);
+
+        lv_obj_set_style_text_color(
+            icon,
+            UI_MENU_BUTTON,
+            LV_PART_MAIN);
+            
     }
     else {
 
@@ -468,6 +523,20 @@ void populate_file_list(const char *path) {
           file_list,
           LV_SYMBOL_FILE,
           entry.name.c_str());
+
+      // Apply the style
+      lv_obj_add_style(btn,
+                        &file_btn_style,
+                        LV_PART_MAIN);
+
+      /* Child 0 = icon label */
+      /* Child 1 = text label */
+      lv_obj_t *icon = lv_obj_get_child(btn, 0);
+
+      lv_obj_set_style_text_color(
+          icon,
+          lv_palette_main(LV_PALETTE_GREEN),
+          LV_PART_MAIN);
     }
 
 lv_obj_add_event_cb(btn,
