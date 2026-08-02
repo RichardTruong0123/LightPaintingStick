@@ -13,6 +13,8 @@ String appVersion = "v2.0.1";
 #define SD_SCK   39
 //#define TFT_CS   45
 
+bool sdCardAvailable = false;
+
  #define EEPROM_SIZE 32   // must be >= highest address used (ony 7 is used)
 extern int speedPercent = 80;
 extern int brightnessPercent = 80;
@@ -126,7 +128,7 @@ const char *numLedOptions =
 
 
 uint8_t numLedsIndex = 0;
-uint16_t NUM_LEDS = 144;
+uint16_t NUM_LEDS = 200;
 
 const char* countdownText[] =
 {

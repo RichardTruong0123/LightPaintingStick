@@ -245,6 +245,7 @@ const MenuItem patternsMenu[] = {
   {"Color Palette", palettes, sizeof(palettes) / sizeof(MenuItem)},
   {"Overlay", overlays, sizeof(overlays) / sizeof(MenuItem)},
   {"Pattern Files", NULL, 0},
+  {"Demo Patterns", NULL, 0}
 };
 
 /* ---------------- ADVANCED ---------------- */
@@ -286,8 +287,7 @@ const MenuItem rootMenu[] = {
   {"Brightness", NULL, 0},
   {"Countdown", NULL, 0},
   {"Advanced Settings", advancedSettings, sizeof(advancedSettings) / sizeof(MenuItem)},
-  {"Color Temperature", colorTempMenu, sizeof(colorTempMenu) / sizeof(MenuItem)},
-  {"Demo Patterns", NULL, 0}
+  {"Color Temperature", colorTempMenu, sizeof(colorTempMenu) / sizeof(MenuItem)}
 };
 
 void SetVersion(const char *version)
@@ -838,12 +838,39 @@ void menu_click_event(lv_event_t *e) {
     // =====================================
     if (strcmp(item->name,
               "Pattern Files") == 0) {
+      // Check if an SD card is available
+      if (!sdCardAvailable)
+      {
+          Serial.println("No SD card detected");
+
+          show_message_panel("No SD card.");
+
+          // Optional: hide message automatically after 2 seconds
+          delay(2000);
+          hide_message_panel();
+
+          return;
+      }
+
+      // SD card is available
+      Serial.println("SD card detected");
 
       show_file_browser();
-
       return;
     }
     
+    // =====================================
+    // DEMO
+    // =====================================
+    if (strcmp(item->name, "Demo Patterns") == 0) {
+      demoSetup();
+      Serial.println("Demo Patterns selected");
+      selectedPattern = PATTERN_DEMO;
+      navigate_back();
+
+      return;
+    }
+
     // =====================================
     // OTHER ACTIONS
     // =====================================
@@ -1367,13 +1394,12 @@ void setup() {
   tft.fillScreen(TFT_BLACK);
 
   if (!SD.begin(SD_CS, tft.getSPIinstance(), 20000000)) { 
-
+    sdCardAvailable = false;
     Serial.println("SD Card Mount Failed");
   }
   else {
-
+    sdCardAvailable = true;
     Serial.println("SD Card Mounted");
-
   }
 
     Serial.println("SD Card Ready");

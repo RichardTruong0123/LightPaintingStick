@@ -121,6 +121,8 @@ void show_image_viewer(
     Serial.printf("W=%d H=%d\n",
                 currentBmpImage->header.w,
                 currentBmpImage->header.h);
+    Serial.printf("Size %u\n",
+                currentBmpImage->data_size);
 
     if (!currentBmpImage)
     {
@@ -137,6 +139,10 @@ void show_image_viewer(
     lv_image_set_src(
         image_viewer_image,
         currentBmpImage);
+
+    Serial.printf("Object size: %d x %d\n",
+                lv_obj_get_width(image_viewer_image),
+                lv_obj_get_height(image_viewer_image));
 
     lv_obj_set_pos(
         image_viewer_image,
@@ -222,6 +228,8 @@ loadBmpToLvgl(const char *path)
     uint16_t *buffer =
         (uint16_t *)ps_malloc(
             pixels * 2);
+
+Serial.printf("Free PSRAM = %u\n", ESP.getFreePsram());
 
     if (!buffer)
     {
