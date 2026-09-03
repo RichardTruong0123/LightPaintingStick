@@ -1,7 +1,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-String appVersion = "v2.0.1";
+String currentVersion = "2.0.3";
+String appVersion = "v" + currentVersion;
 
 // =====================================================
 // SD CARD PINS
@@ -15,7 +16,23 @@ String appVersion = "v2.0.1";
 
 bool sdCardAvailable = false;
 
- #define EEPROM_SIZE 32   // must be >= highest address used (ony 7 is used)
+// #define EEPROM_SIZE 32   // must be >= highest address used (ony 7 is used)
+// =====================================================
+// WIFI SETTINGS
+// =====================================================
+
+#define WIFI_SSID_MAX_LEN      32
+#define WIFI_PASSWORD_MAX_LEN  64
+
+char wifiSSID[WIFI_SSID_MAX_LEN] = "";
+char wifiPassword[WIFI_PASSWORD_MAX_LEN] = "";
+
+bool connectToWiFi();
+bool isWiFiConnected();
+bool wifiSettingsForUpdate = false;
+volatile bool checkUpdateRequested = false;
+
+
 extern int speedPercent = 80;
 extern int brightnessPercent = 80;
 extern int countDownTimer = 0;

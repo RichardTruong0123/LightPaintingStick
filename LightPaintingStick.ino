@@ -256,7 +256,9 @@ const MenuItem advancedSettings[] = {
   {"Auto Incr", NULL, 0},
   {"Repeat", NULL, 0},
   {"NUM LEDS", NULL, 0},
-  {"Startup Pattern", NULL, 0}
+  {"Startup Pattern", NULL, 0},
+  {"WiFi Settings", NULL, 0},
+  {"Check Update", NULL, 0}
 };
 
 /* ---------------- COLOR TEMP ---------------- */
@@ -290,9 +292,9 @@ const MenuItem rootMenu[] = {
   {"Color Temperature", colorTempMenu, sizeof(colorTempMenu) / sizeof(MenuItem)}
 };
 
-void SetVersion(const char *version)
+void SetVersion()
 {
-    appVersion = version;
+ //   appVersion = version;
 
     if (version_label)
     {
@@ -872,18 +874,68 @@ void menu_click_event(lv_event_t *e) {
     }
 
     // =====================================
-    // OTHER ACTIONS
+    // WIFI SETTINGS
     // =====================================
 
+    if (strcmp(item->name, "WiFi Settings") == 0)
+    {
+        show_wifi_settings_panel();
+        return;
+    }
+
+    if (strcmp(item->name, "Check Update") == 0)
+    {
+        checkUpdateRequested = true;
+        return;
+    }
+
+    // // =====================================
+    // // CHECK UPDATE
+    // // =====================================
+    // if (strcmp(item->name, "Check Update") == 0)
+    // {
+    //   if (!isWiFiConnected())
+    //   {
+    //       if (!connectToWiFi())
+    //       {
+    //         show_message_panel(
+    //             "Unable to connect\nto WiFi.");
+    //         // hide message automatically after 2 seconds
+    //         delay(2000);
+    //         hide_message_panel();
+    //         return;
+    //       }
+    //   }
+
+    //   if (checkForFirmwareUpdate())
+    //   {
+    //     updateCheckUpdateVersionLabel();
+
+    //     wifiSettingsForUpdate = true;
+
+    //     show_check_update_panel();
+    //     return;
+    //   }
+    //   else
+    //   {
+    //       show_message_panel(
+    //           "No new update\navailable.");
+    //       delay(2000);
+    //       hide_message_panel();
+    //       return;
+    //   }
+    // }   
+    
+    // =====================================
+    // OTHER ACTIONS
+    // =====================================
     Serial.printf("ACTION -> %s\n",
                   item->name);
 
     lv_label_set_text(status_label,
                       item->name);
-                      
   }
 }
-
 
 void style_menu_button(lv_obj_t *btn) {
 
@@ -1369,7 +1421,7 @@ void create_ui() {
    ========================================================= */
 
 void setup() {
-  SetVersion("v2.0.1");
+  SetVersion();
   Serial.begin(115200);
    pinMode(TFT_CS, OUTPUT);
    digitalWrite(TFT_CS, HIGH);
@@ -1384,6 +1436,11 @@ void setup() {
 
   EEPROM_read();
   Serial.printf("numLEDs: %d\n", NUM_LEDS);
+  EEPROM_readWiFi();
+
+  // Don't connect when starting. it slows the start sequence.
+  //connectToWiFi();
+  
 
   /* ---- DISPLAY ---- */
 
@@ -1498,7 +1555,9 @@ void setup() {
   create_bmp_preview();
   create_message_panel();
   create_image_viewer_panel();
-   
+  create_wifi_settings_panel();
+  create_check_update_panel();
+
   Serial.println("Ready");
 
  //    delay(10000);
@@ -1547,6 +1606,15 @@ void processCountdown()
 
 void loop() {
 
+    if (checkUpdateRequested)
+    {
+        checkUpdateRequested = false;
+
+        checkUpdateProcess();
+    }
+
+    processOTA();
+    
   static uint32_t last_tick = millis();
 
   lv_tick_inc(millis() - last_tick);
