@@ -1,7 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-String currentVersion = "2.0.3";
+String currentVersion = "2.0.1";
 String appVersion = "v" + currentVersion;
 
 // =====================================================

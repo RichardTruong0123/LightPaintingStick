@@ -8,10 +8,10 @@
 // =====================================================
 
 const char *firmwareUrl =
-    "https://github.com/richardtruong0123-creator/LPS_Firmware/raw/refs/heads/main/LightPaintingStick.ino.bin";
+    "https://github.com/RichardTruong0123/LightPaintingStick-WebFlasher/raw/refs/heads/main/firmware/LightPaintingStick.ino.bin";
 
 const char *versionUrl =
-    "https://raw.githubusercontent.com/richardtruong0123-creator/LPS_Firmware/refs/heads/main/version.txt";
+    "https://raw.githubusercontent.com/RichardTruong0123/LightPaintingStick-WebFlasher/refs/heads/main/firmware/version.txt";
 
 // =====================================================
 // CHECK UPDATE PANEL
