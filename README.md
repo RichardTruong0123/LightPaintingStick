@@ -2,6 +2,13 @@
 
 A touchscreen LED pattern controller for the Waveshare ESP32-S3 display using LVGL, FastLED, SD card pattern files, and CST816D touch input.
 
+## 🚀 Flash Firmware
+
+Flash the Light Painting Stick firmware directly from a supported web browser without installing desktop flashing software.
+
+**[Open the Light Painting Stick Web Flasher](https://richardtruong0123.github.io/LightPaintingStick-WebFlasher/)**
+
+> **Recommended:** Use the latest desktop version of Google Chrome or Microsoft Edge with a USB data cable.
 ---
 
 ## Features
