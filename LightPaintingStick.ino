@@ -1605,16 +1605,7 @@ void processCountdown()
    ========================================================= */
 
 void loop() {
-
-    if (checkUpdateRequested)
-    {
-        checkUpdateRequested = false;
-
-        checkUpdateProcess();
-    }
-
-    processOTA();
-    
+  
   static uint32_t last_tick = millis();
 
   lv_tick_inc(millis() - last_tick);
@@ -1635,4 +1626,15 @@ void loop() {
           runPatternTask();
       }
   }
+  
+  if (checkUpdateRequested)
+  {
+      Serial.println("checkUpdateRequested");
+
+      checkUpdateRequested = false;
+
+      checkUpdateProcess();
+  }
+
+  processOTA();
 }

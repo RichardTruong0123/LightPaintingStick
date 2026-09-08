@@ -805,7 +805,9 @@ void checkUpdateProcess()
         {
             show_message_panel(
                 "Unable to connect\nto WiFi.");
-
+            // hide message automatically after 2 seconds
+            delay(2000);
+            hide_message_panel();
             return;
         }
     }
