@@ -41,6 +41,9 @@ A touchscreen LED pattern controller for the Waveshare ESP32-S3 display using LV
 * CST816D capacitive touch
 * MicroSD card
 
+## ESP32-LCD Case
+<img width="1622" height="1030" alt="Tinkdercad_esp32-lcd-touch-2in-case" src="https://github.com/user-attachments/assets/4f65990f-ca6f-45be-91a4-64c02793e38e" />
+
 ---
 
 # Pin Configuration
