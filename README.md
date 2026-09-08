@@ -40,6 +40,7 @@ A touchscreen LED pattern controller for the Waveshare ESP32-S3 display using LV
 * 240x320 ST7789 display
 * CST816D capacitive touch
 * MicroSD card
+
 ## Power board
 <img height="500" alt="image" src="https://github.com/user-attachments/assets/4a27b3c1-7ae9-4dc6-bb69-836fef3e59ce" />
 <img height="500" alt="image" src="https://github.com/user-attachments/assets/71a63acb-3641-4518-89e6-93e6a5bba67d" />
@@ -47,6 +48,9 @@ A touchscreen LED pattern controller for the Waveshare ESP32-S3 display using LV
 ## ESP32-LCD Case
 <img width="1622" height="1030" alt="Tinkdercad_esp32-lcd-touch-2in-case" src="https://github.com/user-attachments/assets/4f65990f-ca6f-45be-91a4-64c02793e38e" />
 
+## WS2812 LEDs (144LEDs/m) - recommended
+<img width="679" height="232" alt="image" src="https://github.com/user-attachments/assets/85d9133e-fdba-4af6-818a-140cacef451f" />
+https://www.amazon.com/LOAMLIN-Individually-Addressable-144Pixels-Waterproof/dp/B0BDRCQWWQ/ref=sr_1_6?crid=38FGYBSCA4FB&dib=eyJ2IjoiMSJ9.A-o8KLRJi9TX2VTF52AHv5_MX8NJ80YQAlKfdMwxR-8G_Rju_4e-qwtef_i41bs3ZXRKWXNtxERgFvcoo4n1edafwXS8wm1WsHL8wJQ3bzkEYWZpSmk7YCNtteqk0GnPhA1e29AJOH2yZiCAeh1fLGtPC-4wyLwLsYr2zoSNJfKOHp4kZ4P4Z2KcGO7gwWV1IgmeSgTX88ghF1mEqVpy1gXZo9E7tp-5_J1DW123vIzVb6evDsV69tExCnqlVg9Xy1HkWCufdwZCxUF6xChPoKQLv2o7AsfWY0wcYFpT2HU.xwbvg9K345sdZOzdh8ulbKRsXNF-hcwb-scs-nvr3w0&dib_tag=se&keywords=ws2812b%2Bled%2Bstrip%2B144%2Bleds%2Fm&qid=1788844185&sprefix=ws2812b%2Bled%2Bstrip%2B144%2Caps%2C205&sr=8-6&th=1
 ---
 
 # Pin Configuration
