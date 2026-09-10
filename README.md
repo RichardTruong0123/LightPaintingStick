@@ -42,7 +42,7 @@ Flash the Light Painting Stick firmware directly from a supported web browser wi
 # Hardware
 
 ## Waveshare ESP32-S3 LCD
-<a href="https://www.waveshare.com/esp32-s3-touch-lcd-2.htm?sku=29667" target="_blank">
+<a href="https://www.waveshare.com/esp32-s3-touch-lcd-2.htm?sku=29667" target="_blank">ESP32-S3-Touch-LCD-2 </a>
 * ESP32-S3
 * 240x320 ST7789 display
 * CST816D capacitive touch
