@@ -49,8 +49,11 @@ Flash the Light Painting Stick firmware directly from a supported web browser wi
 * MicroSD card
 
 ## Power board
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/b4eaee9a-71e8-45ea-b0eb-47247db9534e" />
 <img height="500" alt="image" src="https://github.com/user-attachments/assets/4a27b3c1-7ae9-4dc6-bb69-836fef3e59ce" />
 <img height="500" alt="image" src="https://github.com/user-attachments/assets/71a63acb-3641-4518-89e6-93e6a5bba67d" />
+### Gerber file
+[Power-Conversion_2026-06-08.zip](https://github.com/user-attachments/files/32272054/Power-Conversion_2026-06-08.zip)
 
 ## ESP32-LCD Case
 <a href="https://www.tinkercad.com/things/4DnVmWUjvSV-esp32-lcd-touch-2in/" target="_blank">
