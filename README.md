@@ -60,6 +60,11 @@ Flash the Light Painting Stick firmware directly from a supported web browser wi
 <a href="https://www.tinkercad.com/things/4DnVmWUjvSV-esp32-lcd-touch-2in/" target="_blank">
 <img width="1622" height="1030" alt="Tinkdercad_esp32-lcd-touch-2in-case" src="https://github.com/user-attachments/assets/4f65990f-ca6f-45be-91a4-64c02793e38e" />
 </a>
+
+**STL file for case**
+[ESP32 LCD Touch 2in.zip](https://github.com/user-attachments/files/32272421/ESP32.LCD.Touch.2in.zip)
+
+
 ## WS2812 LEDs (144LEDs/m) - recommended
 <a href="https://www.amazon.com/dp/B0BDRCQWWQ?ref_=cm_sw_r_cp_ud_dp_PZX2BYC1B8XERJ3DRNWV" target="_blank">
  <img width="679" height="232" alt="image" src="https://github.com/user-attachments/assets/85d9133e-fdba-4af6-818a-140cacef451f" />
