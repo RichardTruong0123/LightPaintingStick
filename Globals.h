@@ -1,7 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-String currentVersion = "2.0.4";
+String currentVersion = "2.0.5";
 String appVersion = "v" + currentVersion;
 
 // =====================================================
@@ -29,6 +29,10 @@ char wifiPassword[WIFI_PASSWORD_MAX_LEN] = "";
 
 bool connectToWiFi();
 bool isWiFiConnected();
+void sdWebManagerBegin();
+void sdWebManagerLoop();
+extern volatile bool sdWebBusy;
+uint32_t lastLvglTickMillis = 0;
 bool wifiSettingsForUpdate = false;
 volatile bool checkUpdateRequested = false;
 

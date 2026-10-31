@@ -389,6 +389,13 @@ void my_disp_flush(lv_display_t *disp,
 void my_touchpad_read(lv_indev_t *indev,
                       lv_indev_data_t *data) {
 
+  // During an SD web operation, report touch as released. This prevents a
+  // long synchronous upload from leaving LVGL with a stale pressed state.
+  if (sdWebBusy) {
+    data->state = LV_INDEV_STATE_RELEASED;
+    return;
+  }
+
   uint16_t x, y;
 
     // if (bmpPreviewActive)
@@ -1450,7 +1457,7 @@ void setup() {
 
   tft.fillScreen(TFT_BLACK);
 
-  if (!SD.begin(SD_CS, tft.getSPIinstance(), 20000000)) { 
+  if (!SD.begin(SD_CS, tft.getSPIinstance(), 4000000)) { 
     sdCardAvailable = false;
     Serial.println("SD Card Mount Failed");
   }
@@ -1459,7 +1466,51 @@ void setup() {
     Serial.println("SD Card Mounted");
   }
 
-    Serial.println("SD Card Ready");
+  Serial.println("\n===== SD DIAGNOSTIC =====");
+  Serial.printf("sdCardAvailable = %d\n", sdCardAvailable);
+
+  if (sdCardAvailable) {
+    Serial.printf("SD card type = %d\n", (int)SD.cardType());
+    Serial.printf("SD card size = %llu bytes\n",
+                  (unsigned long long)SD.cardSize());
+
+    File root = SD.open("/");
+
+    Serial.printf("Root open = %s\n", root ? "OK" : "FAILED");
+
+    if (root) {
+      Serial.printf("Root is directory = %s\n",
+                    root.isDirectory() ? "YES" : "NO");
+
+      int count = 0;
+      File entry = root.openNextFile();
+
+      while (entry) {
+        Serial.printf(
+          "%s  %s  %lu bytes\n",
+          entry.isDirectory() ? "[DIR]" : "[FILE]",
+          entry.name(),
+          (unsigned long)entry.size()
+        );
+
+        entry.close();
+        count++;
+        entry = root.openNextFile();
+      }
+
+      Serial.printf("Entries found = %d\n", count);
+      root.close();
+    }
+  }
+
+  Serial.println("===== END SD DIAGNOSTIC =====\n");
+
+
+  Serial.println("SD Card Ready");
+
+  // Start the SD web manager using the SD filesystem already mounted above.
+  // Do not initialize SPI or SD again in SDWebManager.ino.
+  sdWebManagerBegin();
 
   /* =====================================
     FASTLED INIT
@@ -1522,6 +1573,7 @@ void setup() {
   /* ---- LVGL ---- */
 
   lv_init();
+  lastLvglTickMillis = millis();
 
   lv_display_t *disp =
       lv_display_create(SCREEN_WIDTH,
@@ -1605,12 +1657,12 @@ void processCountdown()
    ========================================================= */
 
 void loop() {
-  
-  static uint32_t last_tick = millis();
+  // Service HTTP requests without replacing the existing LVGL/playback loop.
+  sdWebManagerLoop();
 
-  lv_tick_inc(millis() - last_tick);
-
-  last_tick = millis();
+  uint32_t now = millis();
+  lv_tick_inc(now - lastLvglTickMillis);
+  lastLvglTickMillis = now;
 
   //if (!bmpPreviewActive)
     lv_timer_handler();
