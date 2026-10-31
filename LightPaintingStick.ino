@@ -1457,7 +1457,7 @@ void setup() {
 
   tft.fillScreen(TFT_BLACK);
 
-  if (!SD.begin(SD_CS, tft.getSPIinstance(), 4000000)) { 
+  if (!SD.begin(SD_CS, tft.getSPIinstance(), 20000000)) { 
     sdCardAvailable = false;
     Serial.println("SD Card Mount Failed");
   }
