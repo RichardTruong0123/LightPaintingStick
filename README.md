@@ -18,6 +18,7 @@ Flash the Light Painting Stick firmware directly from a supported web browser wi
 * CST816D capacitive touch support
 * FastLED LED controller
 * SD card file browser
+* Wi-Fi SD Web Manager for browser-based file access
 * BMP file preview
 * BMP-to-LED pattern playback
 * Color palettes
@@ -306,6 +307,47 @@ Serial.printf(
 * BMP files only
 * Long press to preview BMP
 * Scrollable file list
+
+---
+
+# SD Web Manager (Wi-Fi)
+
+The Light Painting Stick includes a browser-based SD card file manager. Connect a phone, tablet, or computer to the ESP32-S3 Wi-Fi access point to manage files on the device's microSD card. No internet connection or separate application is required.
+
+## Connect to the Light Painting Stick
+
+1. Power on the Light Painting Stick and wait for the SD Web Manager access point to start.
+2. On your phone, tablet, or computer, open the Wi-Fi network settings.
+3. Find and select the network named:
+
+   ```text
+   LightPaintingStick-XXXXXXXXXXXX
+   ```
+
+   The characters after `LightPaintingStick-` identify the ESP32 device and are based on its MAC address. The exact suffix will be different for each device.
+
+4. If your device reports that the network has no internet access, choose the option to stay connected. The access point is used to communicate directly with the Light Painting Stick; it does not need internet access.
+5. If the device asks for a Wi-Fi password, enter the password configured for the access point in the firmware.
+
+## Open the SD Card File Manager
+
+Once connected to the `LightPaintingStick-...` network, open a web browser and enter this address in the address bar:
+
+**[http://192.168.4.1](http://192.168.4.1)**
+
+The SD Web Manager page should load and display the files and folders on the microSD card.
+
+## SD Web Manager Features
+
+* Browse SD card folders and files
+* Upload BMP files from your phone or computer
+* Upload multiple files
+* Create folders to organize pattern files
+* Delete files and folders
+* View BMP image previews in a preview window
+* View upload progress and status
+
+When finished, close the browser and reconnect your phone or computer to its normal Wi-Fi network if needed. The Light Painting Stick's touchscreen file browser remains available for browsing and selecting patterns on the device.
 
 ---
 
