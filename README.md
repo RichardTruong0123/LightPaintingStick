@@ -327,7 +327,7 @@ The Light Painting Stick includes a browser-based SD card file manager. Connect 
    The characters after `LightPaintingStick-` identify the ESP32 device and are based on its MAC address. The exact suffix will be different for each device.
 
 4. If your device reports that the network has no internet access, choose the option to stay connected. The access point is used to communicate directly with the Light Painting Stick; it does not need internet access.
-5. If the device asks for a Wi-Fi password, enter the password configured for the access point in the firmware.
+5. If the device asks for a Wi-Fi password, enter the password "PaintLight0123" configured for the access point in the firmware.
 
 ## Open the SD Card File Manager
 
